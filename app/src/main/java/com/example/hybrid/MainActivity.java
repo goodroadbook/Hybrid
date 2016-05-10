@@ -53,8 +53,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(mContext,
                             aMessage,
                             Toast.LENGTH_SHORT).show();
-
-                    runningApp(aMessage);
                 }
             });
         }
@@ -88,31 +86,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             default:
                 break;
-        }
-    }
-
-    private void runningApp(String aPackageName)
-    {
-        boolean isState = false;
-        Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
-        mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-        PackageManager pm = getPackageManager();
-        List<ResolveInfo> installedApps = pm.queryIntentActivities(mainIntent, 0);
-
-        for (ResolveInfo resolveInfo : installedApps)
-        {
-            if(true == resolveInfo.activityInfo.packageName.equals(aPackageName))
-            {
-                Intent intent = getPackageManager().getLaunchIntentForPackage(resolveInfo.activityInfo.packageName);
-                startActivity(intent);
-                isState = true;
-                break;
-            }
-        }
-
-        if(false == isState)
-        {
-            Toast.makeText(this, "설치된 앱이 없습니다.", Toast.LENGTH_LONG).show();
         }
     }
 }
